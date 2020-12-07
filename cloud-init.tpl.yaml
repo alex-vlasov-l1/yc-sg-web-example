@@ -2,10 +2,15 @@
 datasource:
   Ec2:
     strict_id: false
-ssh_pwauth: no
+write_files:
+- content: |
+    net.ipv6.conf.all.disable_ipv6=1
+    net.ipv6.conf.default.disable_ipv6=1
+  path: /etc/sysctl.d/88-disable.conf
+  owner: root
 users:
   - default
-  - name: ubuntu
+  - name: yc-user
     groups: wheel
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
@@ -16,12 +21,6 @@ packages:
   - openssh-server
 package_update: true
 package_reboot_if_required: true
-- write_files:
-  content: |
-    net.ipv6.conf.all.disable_ipv6=1
-    net.ipv6.conf.default.disable_ipv6=1
-  path: /etc/sysctl.d/88-disable.conf
-  owner: root
 runcmd:
   - sysctl -w net.ipv6.conf.all.disable_ipv6=1
   - sysctl -w net.ipv6.conf.default.disable_ipv6=1
