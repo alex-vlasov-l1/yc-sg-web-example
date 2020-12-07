@@ -1,5 +1,5 @@
 # Terraform and Security Groups Example 1
-Mock dev/stage/prod environment with sample security groups to provide isolation
+Mock web-application environment with security groups to provide secure remote-access and isolation
 
 ## Предварительная настройка
 Заполняем файл terraform.tfvars_example и переименовываем его в terraform.tfvars
